@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background-color: #121212;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #64ffda;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            max-width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: transparent;
+            color: #64ffda;
+            padding: 12px 24px;
+            border: 2px solid #64ffda;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 36px;
+            color: #64ffda;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #64ffda;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #64ffda;
+        }
+        
+        .nav-links {
+            display: flex;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: #e0e0e0;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #64ffda;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            background-color: #121212;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(100, 255, 218, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-text {
+            width: 50%;
+        }
+        
+        .hero-text h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            color: #fff;
+            line-height: 1.2;
+        }
+        
+        .hero-text p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #b3b3b3;
+        }
+        
+        .hero-image {
+            width: 40%;
+        }
+        
+        .hero-image img {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-image img:hover {
+            transform: translateY(-10px);
+        }
+        
+        /* About Section */
+        #about {
+            background-color: #1a1a1a;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .about-image {
+            width: 40%;
+        }
+        
+        .about-image img {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+        }
+        
+        .about-text {
+            width: 55%;
+        }
+        
+        .about-text h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #64ffda;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            color: #b3b3b3;
+        }
+        
+        .skills {
+            margin-top: 30px;
+        }
+        
+        .skills h4 {
+            margin-bottom: 30px;
+            color: #64ffda;
+            font-size: 24px;
+        }
+        
+        .skill-item {
+            background: #2a2a2a;
+            height: 10px;
+            border-radius: 5px;
+            margin-bottom: 35px;
+            position: relative;
+        }
+        
+        .skill-item p {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            margin: 0;
+            color: #b3b3b3;
+        }
+        
+        .skill-level {
+            height: 100%;
+            background: #64ffda;
+            border-radius: 5px;
+            position: relative;
+            transition: width 1s ease;
+        }
+        
+        .skill-level::after {
+            content: attr(data-level);
+            position: absolute;
+            right: 0;
+            top: -25px;
+            color: #64ffda;
+            font-weight: bold;
+        }
+        
+        /* Services Section */
+        #services {
+            background-color: #121212;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-item {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+            border-color: rgba(100, 255, 218, 0.3);
+        }
+        
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #64ffda;
+        }
+        
+        .service-item h3 {
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .service-item p {
+            color: #b3b3b3;
+        }
+        
+        /* Portfolio Section */
+        #portfolio {
+            background-color: #1a1a1a;
+        }
+        
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .portfolio-filters button {
+            background: transparent;
+            border: 2px solid #64ffda;
+            color: #64ffda;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-weight: 500;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-filters button.active,
+        .portfolio-filters button:hover {
+            background: rgba(100, 255, 218, 0.1);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .portfolio-img {
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(18, 18, 18, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .portfolio-overlay h3 {
+            color: #fff;
+            margin-bottom: 10px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-overlay p {
+            color: #64ffda;
+            margin-bottom: 20px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-overlay a {
+            color: #fff;
+            border: 2px solid #64ffda;
+            padding: 8px 20px;
+            border-radius: 5px;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay h3,
+        .portfolio-item:hover .portfolio-overlay p,
+        .portfolio-item:hover .portfolio-overlay a {
+            transform: translateY(0);
+        }
+        
+        /* Testimonials Section */
+        #testimonials {
+            background-color: #121212;
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-slide {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            background: #1a1a1a;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .testimonial-slide.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .testimonial-text {
+            font-size: 18px;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #b3b3b3;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            font-size: 18px;
+            color: #64ffda;
+        }
+        
+        .testimonial-position {
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .testimonial-nav button {
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            margin: 0 10px;
+            cursor: pointer;
+            color: #64ffda;
+            transition: color 0.3s ease;
+        }
+        
+        .testimonial-nav button:hover {
+            color: #fff;
+        }
+        
+        /* Contact Section */
+        #contact {
+            background-color: #1a1a1a;
+        }
+        
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .contact-info {
+            width: 45%;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: #64ffda;
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-details p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            color: #b3b3b3;
+        }
+        
+        .contact-details i {
+            margin-right: 10px;
+            color: #64ffda;
+        }
+        
+        .contact-form {
+            width: 50%;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #64ffda;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: #2a2a2a;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 5px;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #64ffda;
+            box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.1);
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #121212;
+            color: #b3b3b3;
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .social-icons a {
+            margin: 0 15px;
+            color: #b3b3b3;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: #64ffda;
+            transform: translateY(-3px);
+        }
+        
+        .footer-text {
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 70px;
+                background-color: #1a1a1a;
+                width: 100%;
+                height: calc(100vh - 70px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            }
+            
+            .nav-links.active {
+                transform: translateX(0);
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hero-content, .about-content, .contact-container {
+                flex-direction: column;
+            }
+            
+            .hero-text, .hero-image, .about-text, .about-image, .contact-info, .contact-form {
+                width: 100%;
+                margin-bottom: 30px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .hero-text h1 {
+                font-size: 36px;
+            }
+        }
+        
+        /* Add this to the CSS section */
+        .resume-section {
+            background-color: #121212;
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .resume-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .resume-download {
+            margin-top: 30px;
+            padding: 30px;
+            background: #1a1a1a;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .resume-download p {
+            color: #b3b3b3;
+            margin-bottom: 20px;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: #64ffda;
+            padding: 15px 30px;
+            border: 2px solid #64ffda;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .download-btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Portfolio</div>
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Hi, I'm <span class="highlight">Khushboo Kumari</span></h1>
+                    <p>I'm a passionate Full Stack Developer with expertise in MERN Stack development. I specialize in creating modern and efficient web applications.</p>
+                    <a href="#contact" class="btn">Contact Me</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?w=500&h=400&fit=crop" alt="Profile Picture">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=500&fit=crop" alt="About Image">
+                </div>
+                <div class="about-text">
+                    <h3>Who I Am</h3>
+                    <p>I am a Full Stack Developer with a strong foundation in web development and a passion for creating innovative solutions. Currently pursuing my B.Tech in Computer Science and Engineering from Maharishi Dayanand University, I have developed expertise in both front-end and back-end technologies.</p>
+                    <p>With hands-on experience in the MERN stack (MongoDB, Express.js, React.js, Node.js), I have successfully completed various projects that demonstrate my ability to build scalable and efficient web applications. I am particularly interested in creating user-friendly interfaces and optimizing application performance.</p>
+                    <div class="skills">
+                        <h4>My Skills</h4>
+                        <div class="skill-item">
+                            <p>MERN Stack</p>
+                            <div class="skill-level" data-level="90%" style="width: 90%;"></div>
+                        </div>
+                        <div class="skill-item">
+                            <p>JavaScript/TypeScript</p>
+                            <div class="skill-level" data-level="85%" style="width: 85%;"></div>
+                        </div>
+                        <div class="skill-item">
+                            <p>React.js & Redux</p>
+                            <div class="skill-level" data-level="88%" style="width: 88%;"></div>
+                        </div>
+                        <div class="skill-item">
+                            <p>Node.js & Express</p>
+                            <div class="skill-level" data-level="85%" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Resume Section after About Section -->
+    <section id="resume" class="resume-section">
+        <div class="container">
+            <h2 class="section-title">My Resume</h2>
+            <div class="resume-content">
+                <div class="resume-download">
+                    <p>Download my resume to learn more about my education, work experience, and technical skills.</p>
+                    <a href="Khushboo Kumari._Resumepdf.pdf" class="download-btn" download>
+                        <span>Download Resume</span>
+                        <span>📄</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">My Services</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon">💻</div>
+                    <h3>Web Development</h3>
+                    <p>I create responsive websites that work on all devices, providing a seamless experience for your users.</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">🎨</div>
+                    <h3>UI/UX Design</h3>
+                    <p>I design beautiful and intuitive user interfaces that enhance the user experience of your website.</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">📱</div>
+                    <h3>Mobile Development</h3>
+                    <p>I develop mobile applications that run smoothly on both iOS and Android platforms.</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">📊</div>
+                    <h3>SEO Optimization</h3>
+                    <p>I optimize your website to rank higher in search engines, bringing more traffic to your business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">My Portfolio</h2>
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web Design</button>
+                <button class="filter-btn" data-filter="app">App Development</button>
+                <button class="filter-btn" data-filter="ui">UI/UX</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-category="web">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1517292987719-0369a794ec0f?w=300&h=250&fit=crop" alt="Portfolio Item">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>E-commerce Website</h3>
+                        <p>Web Development</p>
+                        <a href="#">View Project</a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="app">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1526925539332-aa3b66e35444?w=300&h=250&fit=crop" alt="Portfolio Item">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Food Delivery App</h3>
+                        <p>App Development</p>
+                        <a href="#">View Project</a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="ui">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=250&fit=crop" alt="Portfolio Item">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Dashboard UI</h3>
+                        <p>UI/UX Design</p>
+                        <a href="#">View Project</a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="web">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=300&h=250&fit=crop" alt="Portfolio Item">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Real Estate Website</h3>
+                        <p>Web Development</p>
+                        <a href="#">View Project</a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="app">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=250&fit=crop" alt="Portfolio Item">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Fitness Tracker App</h3>
+                        <p>App Development</p>
+                        <a href="#">View Project</a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="ui">
+                    <div class="portfolio-img">
+                        <img src="https://images.unsplash.com/photo-1573867639040-6dd25fa5f597?w=300&h=250&fit=crop" alt="Portfolio Item">
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Social Media UI</h3>
+                        <p>UI/UX Design</p>
+                        <a href="#">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What My Clients Say</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-slide active">
+                    <p class="testimonial-text">"Working with this developer was an amazing experience. They delivered the project on time and exceeded all our expectations. Their attention to detail and creativity made our website stand out from the competition."</p>
+                    <p class="testimonial-author">John Doe</p>
+                    <p class="testimonial-position">CEO, Tech Company</p>
+                </div>
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"I'm extremely satisfied with the website they created for my business. It's not only visually appealing but also very functional. The developer was very responsive and incorporated all my feedback promptly."</p>
+                    <p class="testimonial-author">Jane Smith</p>
+                    <p class="testimonial-position">Owner, Fashion Boutique</p>
+                </div>
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"This developer transformed our outdated website into a modern, responsive platform that has significantly increased our online presence. Their technical expertise and creative vision were exactly what we needed."</p>
+                    <p class="testimonial-author">Mike Johnson</p>
+                    <p class="testimonial-position">Marketing Director, Startup</p>
+                </div>
+                <div class="testimonial-nav">
+                    <button id="prev-testimonial">&#8249;</button>
+                    <button id="next-testimonial">&#8250;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-details">
+                        <p><i>📍</i> 123 Street, City, Country</p>
+                        <p><i>✉️</i> youremail@example.com</p>
+                        <p><i>📞</i> +1 234 567 890</p>
+                    </div>
+                    <div class="social-links">
+                        <h4>Follow Me</h4>
+                        <div class="social-icons">
+                            <a href="#"><span>LinkedIn</span></a>
+                            <a href="#"><span>Twitter</span></a>
+                            <a href="#"><span>GitHub</span></a>
+                            <a href="#"><span>Instagram</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-icons">
+                <a href="#"><span>LinkedIn</span></a>
+                <a href="#"><span>Twitter</span></a>
+                <a href="#"><span>GitHub</span></a>
+                <a href="#"><span>Instagram</span></a>
+            </div>
+            <p class="footer-text">&copy; 2023 Your Name. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile nav when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Portfolio filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Testimonial slider
+        const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+        const prevButton = document.querySelector('#prev-testimonial');
+        const nextButton = document.querySelector('#next-testimonial');
+        let currentSlide = 0;
+        
+        function showSlide(n) {
+            // Hide all slides
+            testimonialSlides.forEach(slide => slide.classList.remove('active'));
+            // Show the selected slide
+            testimonialSlides[n].classList.add('active');
+        }
+        
+        function nextSlide() {
+            currentSlide++;
+            if (currentSlide >= testimonialSlides.length) {
+                currentSlide = 0;
+            }
+            showSlide(currentSlide);
+        }
+        
+        function prevSlide() {
+            currentSlide--;
+            if (currentSlide < 0) {
+                currentSlide = testimonialSlides.length - 1;
+            }
+            showSlide(currentSlide);
+        }
+        
+        // Set up event listeners for testimonial navigation
+        nextButton.addEventListener('click', nextSlide);
+        prevButton.addEventListener('click', prevSlide);
+        
+        // Auto-rotate testimonials
+        setInterval(nextSlide, 5000);
+        
+        // Form submission
+        const contactForm = document.querySelector('#contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.querySelector('#name').value;
+            const email = document.querySelector('#email').value;
+            const subject = document.querySelector('#subject').value;
+            const message = document.querySelector('#message').value;
+            
+            // Here you would normally send the form data to a server
+            // For this example, we'll just log it to the console
+            console.log('Form submitted:', { name, email, subject, message });
+            
+            // Show a success message (in a real app, this would happen after successful API response)
+            alert('Thank you for your message! I will get back to you soon.');
+            
+            // Reset the form
+            contactForm.reset();
+        });
+        
+        // Highlight active navigation link based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
