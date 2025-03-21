@@ -198,9 +198,12 @@
         }
         
         .hero-image img {
-            border-radius: 15px;
+            border-radius: 50%;
             box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
             transition: transform 0.3s ease;
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
         }
         
         .hero-image img:hover {
@@ -210,21 +213,63 @@
         /* About Section */
         #about {
             background-color: #1a1a1a;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(100, 255, 218, 0.05) 0%, transparent 50%);
+            z-index: 1;
         }
         
         .about-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            position: relative;
+            z-index: 2;
+            gap: 50px;
         }
         
         .about-image {
             width: 40%;
+            position: relative;
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #64ffda;
+            border-radius: 15px;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        
+        .about-image:hover::before {
+            transform: translate(-10px, -10px);
         }
         
         .about-image img {
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.02);
         }
         
         .about-text {
@@ -233,31 +278,63 @@
         
         .about-text h3 {
             font-size: 32px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #64ffda;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .about-text h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(to right, #64ffda, transparent);
         }
         
         .about-text p {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: #b3b3b3;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        
+        .about-text .highlight {
+            color: #64ffda;
+            font-weight: 500;
         }
         
         .skills {
-            margin-top: 30px;
+            margin-top: 40px;
         }
         
         .skills h4 {
             margin-bottom: 30px;
             color: #64ffda;
             font-size: 24px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .skills h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #64ffda;
         }
         
         .skill-item {
-            background: #2a2a2a;
+            background: rgba(42, 42, 42, 0.8);
             height: 10px;
             border-radius: 5px;
             margin-bottom: 35px;
             position: relative;
+            overflow: hidden;
         }
         
         .skill-item p {
@@ -265,15 +342,35 @@
             top: -25px;
             left: 0;
             margin: 0;
-            color: #b3b3b3;
+            color: #e0e0e0;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .skill-level {
             height: 100%;
-            background: #64ffda;
+            background: linear-gradient(to right, #64ffda, #4ac7c0);
             border-radius: 5px;
             position: relative;
-            transition: width 1s ease;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .skill-level::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
         
         .skill-level::after {
@@ -283,6 +380,7 @@
             top: -25px;
             color: #64ffda;
             font-weight: bold;
+            font-size: 14px;
         }
         
         /* Services Section */
@@ -635,33 +733,88 @@
             .hero-text h1 {
                 font-size: 36px;
             }
+            
+            .about-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .about-image, .about-text {
+                width: 100%;
+            }
+            
+            .about-image::before {
+                display: none;
+            }
         }
         
-        /* Add this to the CSS section */
+        /* Update Resume Section Styles */
         .resume-section {
             background-color: #121212;
-            text-align: center;
+            text-align: left;
             padding: 60px 0;
         }
         
         .resume-content {
-            max-width: 700px;
+            max-width: 900px;
             margin: 0 auto;
-        }
-        
-        .resume-download {
-            margin-top: 30px;
-            padding: 30px;
             background: #1a1a1a;
+            padding: 40px;
             border-radius: 15px;
             border: 1px solid rgba(100, 255, 218, 0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
-        
-        .resume-download p {
+
+        .resume-header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(100, 255, 218, 0.1);
+            padding-bottom: 20px;
+        }
+
+        .resume-header h1 {
+            color: #64ffda;
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .resume-header p {
             color: #b3b3b3;
-            margin-bottom: 20px;
+            margin: 5px 0;
         }
-        
+
+        .resume-section-title {
+            color: #64ffda;
+            font-size: 24px;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .resume-section-content {
+            margin-bottom: 25px;
+        }
+
+        .resume-section-content h3 {
+            color: #fff;
+            font-size: 20px;
+            margin: 15px 0 10px;
+        }
+
+        .resume-section-content p {
+            color: #b3b3b3;
+            margin: 5px 0;
+        }
+
+        .resume-section-content ul {
+            list-style-type: disc;
+            margin: 10px 0 10px 20px;
+            color: #b3b3b3;
+        }
+
+        .resume-section-content li {
+            margin: 5px 0;
+        }
+
         .download-btn {
             display: inline-flex;
             align-items: center;
@@ -675,12 +828,259 @@
             transition: all 0.3s ease;
             font-weight: 500;
             text-decoration: none;
+            margin-top: 30px;
         }
-        
+
         .download-btn:hover {
             background: rgba(100, 255, 218, 0.1);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
+        }
+        
+        /* Add styles for Certifications Section */
+        .certifications-section {
+            background-color: #121212;
+            padding: 80px 0;
+        }
+        
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .certification-item {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .certification-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(100, 255, 218, 0.3);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.1);
+        }
+        
+        .certification-item h3 {
+            color: #64ffda;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .certification-item p {
+            color: #b3b3b3;
+            font-size: 14px;
+        }
+
+        /* Add these animation styles right after the Reset and Base Styles */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 5px rgba(100, 255, 218, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(100, 255, 218, 0.4); }
+            100% { box-shadow: 0 0 5px rgba(100, 255, 218, 0.2); }
+        }
+
+        .animate {
+            opacity: 0;
+            animation-duration: 0.8s;
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* Enhanced Hero Section */
+        .hero-text h1 {
+            animation: slideInLeft 1s ease forwards;
+        }
+
+        .hero-text p {
+            animation: slideInLeft 1s 0.3s ease forwards;
+            opacity: 0;
+        }
+
+        .hero-text .btn {
+            animation: slideInLeft 1s 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .hero-image img {
+            animation: scaleIn 1s 0.3s ease forwards;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-image img:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(100, 255, 218, 0.3);
+        }
+
+        /* Enhanced Service Items */
+        .service-item {
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            background: rgba(26, 26, 26, 0.8);
+        }
+
+        .service-item:hover {
+            transform: translateY(-12px);
+            border-color: #64ffda;
+            box-shadow: 0 15px 40px rgba(100, 255, 218, 0.2);
+            animation: glowPulse 2s infinite;
+        }
+
+        .service-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .service-item:hover .service-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        /* Enhanced Portfolio Items */
+        .portfolio-item {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .portfolio-overlay {
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Enhanced Skills Section */
+        .skill-level {
+            position: relative;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-level::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(100, 255, 218, 0.3), rgba(100, 255, 218, 0.1));
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Enhanced Form Elements */
+        .form-group input,
+        .form-group textarea {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            background: rgba(42, 42, 42, 0.8);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #64ffda;
+            box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Navigation */
+        .nav-links a {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #64ffda;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Enhanced Certifications */
+        .certification-item {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            background: rgba(26, 26, 26, 0.8);
+        }
+
+        .certification-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: #64ffda;
+            box-shadow: 0 15px 40px rgba(100, 255, 218, 0.2);
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
         }
     </style>
 </head>
@@ -693,6 +1093,7 @@
                 <ul class="nav-links">
                     <li><a href="#hero">Home</a></li>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#resume">Resume</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
@@ -713,11 +1114,11 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>Hi, I'm <span class="highlight">Khushboo Kumari</span></h1>
-                    <p>I'm a passionate Full Stack Developer with expertise in MERN Stack development. I specialize in creating modern and efficient web applications.</p>
+                    <p>I'm an aspiring Data Analytics and Data Science professional with expertise in Power BI, Python, SQL, and Microsoft Excel. I specialize in data-driven decision-making and creating interactive dashboards for business insights.</p>
                     <a href="#contact" class="btn">Contact Me</a>
                 </div>
                 <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?w=500&h=400&fit=crop" alt="Profile Picture">
+                    <img src="profile.png" alt="Khushboo Kumari">
                 </div>
             </div>
         </div>
@@ -729,29 +1130,30 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=500&fit=crop" alt="About Image">
+                    <img src="profile.png" alt="Khushboo Kumari">
                 </div>
                 <div class="about-text">
-                    <h3>Who I Am</h3>
-                    <p>I am a Full Stack Developer with a strong foundation in web development and a passion for creating innovative solutions. Currently pursuing my B.Tech in Computer Science and Engineering from Maharishi Dayanand University, I have developed expertise in both front-end and back-end technologies.</p>
-                    <p>With hands-on experience in the MERN stack (MongoDB, Express.js, React.js, Node.js), I have successfully completed various projects that demonstrate my ability to build scalable and efficient web applications. I am particularly interested in creating user-friendly interfaces and optimizing application performance.</p>
+                    <h3>Passionate Data Enthusiast</h3>
+                    <p>Hello! I'm <span class="highlight">Khushboo Kumari</span>, a dedicated B.Tech student in Computer Science & Engineering at Parul University, maintaining a strong CGPA of 7.76/10 (2022-2026). My journey in technology and data science is driven by a passion for transforming raw data into meaningful insights.</p>
+                    <p>As a <span class="highlight">Data Science Intern at CODTECH IT SOLUTIONS</span>, I've had the opportunity to work on real-world projects, developing expertise in data processing, machine learning models, and creating impactful visualizations using Power BI and Tableau. My academic foundation, combined with hands-on experience, has equipped me with a unique perspective on data-driven decision-making.</p>
+                    <p>I specialize in <span class="highlight">data analytics, visualization, and machine learning</span>, with a particular focus on creating interactive dashboards that help businesses make informed decisions. My goal is to leverage technology to solve complex problems and drive innovation in the field of data science.</p>
                     <div class="skills">
-                        <h4>My Skills</h4>
+                        <h4>Technical Expertise</h4>
                         <div class="skill-item">
-                            <p>MERN Stack</p>
+                            <p>Data Analytics</p>
                             <div class="skill-level" data-level="90%" style="width: 90%;"></div>
                         </div>
                         <div class="skill-item">
-                            <p>JavaScript/TypeScript</p>
+                            <p>Python & SQL</p>
                             <div class="skill-level" data-level="85%" style="width: 85%;"></div>
                         </div>
                         <div class="skill-item">
-                            <p>React.js & Redux</p>
+                            <p>Power BI & Tableau</p>
                             <div class="skill-level" data-level="88%" style="width: 88%;"></div>
                         </div>
                         <div class="skill-item">
-                            <p>Node.js & Express</p>
-                            <div class="skill-level" data-level="85%" style="width: 85%;"></div>
+                            <p>Machine Learning</p>
+                            <div class="skill-level" data-level="82%" style="width: 82%;"></div>
                         </div>
                     </div>
                 </div>
@@ -759,18 +1161,103 @@
         </div>
     </section>
 
-    <!-- Add Resume Section after About Section -->
+    <!-- Resume Section -->
     <section id="resume" class="resume-section">
         <div class="container">
             <h2 class="section-title">My Resume</h2>
             <div class="resume-content">
-                <div class="resume-download">
-                    <p>Download my resume to learn more about my education, work experience, and technical skills.</p>
-                    <a href="Khushboo Kumari._Resumepdf.pdf" class="download-btn" download>
-                        <span>Download Resume</span>
-                        <span>📄</span>
-                    </a>
+                <!-- Resume Header -->
+                <div class="resume-header">
+                    <h1>Khushboo Kumari</h1>
+                    <p>B.Tech. - Computer Science & Engineering</p>
+                    <p>Parul University, Vadodara, Gujarat, India</p>
+                    <p>Ph: +91-9504386204</p>
+                    <p>Email: khushboostar1232@gmail.com</p>
+                    <p>LinkedIn: <a href="https://linkedin.com/in/khushbookumari15" target="_blank">linkedin.com/in/khushbookumari15</a></p>
                 </div>
+
+                <h3 class="resume-section-title">Professional Summary</h3>
+                <div class="resume-section-content">
+                    <p>Aspiring data analytics and data science professional with expertise in Power BI, Python, SQL, and Microsoft Excel. Skilled in data cleaning, statistical analysis, machine learning, and data-driven decision-making. Proficient in creating interactive dashboards, analyzing sales trends, and conducting customer behavior studies to enhance business strategies. Strong analytical, problem-solving, and communication skills.</p>
+                </div>
+
+                <h3 class="resume-section-title">Technical Skills</h3>
+                <div class="resume-section-content">
+                    <ul>
+                        <li>Data Analytics: Data Cleaning, Data Collection, Data Validation, Data Extraction</li>
+                        <li>Programming: Python, SQL, C++</li>
+                        <li>Tools & Technologies: Power BI, Microsoft Excel, Tableau</li>
+                        <li>Machine Learning: Predictive Modeling, Statistical Analysis</li>
+                        <li>Data Visualization: Dashboard Creation, Reporting, KPI Analysis</li>
+                    </ul>
+                </div>
+
+                <h3 class="resume-section-title">Education</h3>
+                <div class="resume-section-content">
+                    <h3>Parul University, Vadodara</h3>
+                    <p>B.Tech. - CSE (PIT) | CGPA: 7.76 / 10 (2022 - 2026)</p>
+                    
+                    <h3>Kendriya Vidyalaya, Muzaffarpur</h3>
+                    <p>12th - CBSE | 66.60% (2022)</p>
+                    <p>10th - CBSE | 74.80% (2020)</p>
+                </div>
+
+                <h3 class="resume-section-title">Experience</h3>
+                <div class="resume-section-content">
+                    <h3>Data Science Intern – CODTECH IT SOLUTIONS</h3>
+                    <p>(Jan 2025 - Feb 2025)</p>
+                    <ul>
+                        <li>Worked on data processing and machine learning models for business insights.</li>
+                        <li>Applied data analytics techniques to real-world datasets for predictive modeling.</li>
+                        <li>Developed data visualization solutions using Power BI and Tableau.</li>
+                        <li>Conducted data cleaning and preprocessing to enhance analytical accuracy.</li>
+                    </ul>
+                </div>
+
+                <h3 class="resume-section-title">Projects</h3>
+                <div class="resume-section-content">
+                    <h3>HR Analytics Dashboard (Nov 2024 - Jan 2025)</h3>
+                    <ul>
+                        <li>Developed an interactive Power BI dashboard for employee attrition analysis.</li>
+                        <li>Key Metrics: Attrition Rate (16.1%), Average Salary (6.5K), and Tenure Insights.</li>
+                        <li>Provided visualization of attrition trends based on demographics and job roles.</li>
+                    </ul>
+
+                    <h3>Netflix Data Analysis (Jan 2025)</h3>
+                    <ul>
+                        <li>Created an analytical dashboard for Netflix content distribution and ratings.</li>
+                        <li>Identified trends in content growth, genre preferences, and global availability.</li>
+                        <li>Visualized content ratings and distribution by country.</li>
+                    </ul>
+                </div>
+
+                <h3 class="resume-section-title">Certifications & Training</h3>
+                <div class="resume-section-content">
+                    <ul>
+                        <li>Power BI Virtual Internship (PwC) – 80% Score (Jan 2025)</li>
+                        <li>Data Analytics & Visualization (Forage - Accenture) – 80% Score (Sep 2024)</li>
+                        <li>Quantium Data Analytics Certification – 80% Score (Jan 2025)</li>
+                        <li>DSA using C++ Certification</li>
+                        <li>Gujarat Tableau User Group – Data Visualization Workshop (Dec 2024)</li>
+                        <li>GUVI Certification by HCL – Data Analytics & Data Science (Dec 2024)</li>
+                        <li>Excel Using AI – OfficeMoster Workshop (May 2024)</li>
+                    </ul>
+                </div>
+
+                <h3 class="resume-section-title">Personal Details</h3>
+                <div class="resume-section-content">
+                    <ul>
+                        <li>Date of Birth: 15 Jan 2004</li>
+                        <li>Languages: English, Hindi</li>
+                        <li>Current Address: Parul University, Vadodara, Gujarat, India - 391760</li>
+                        <li>Permanent Address: Rampur Kisuni, Sakra, Muzaffarpur, Bihar, India - 843119</li>
+                    </ul>
+                </div>
+
+                <a href="Khushboo Kumari._Resumepdf.pdf" class="download-btn" download>
+                    <span>Download Resume</span>
+                    <span>📄</span>
+                </a>
             </div>
         </div>
     </section>
@@ -781,24 +1268,24 @@
             <h2 class="section-title">My Services</h2>
             <div class="services-grid">
                 <div class="service-item">
-                    <div class="service-icon">💻</div>
-                    <h3>Web Development</h3>
-                    <p>I create responsive websites that work on all devices, providing a seamless experience for your users.</p>
-                </div>
-                <div class="service-item">
-                    <div class="service-icon">🎨</div>
-                    <h3>UI/UX Design</h3>
-                    <p>I design beautiful and intuitive user interfaces that enhance the user experience of your website.</p>
-                </div>
-                <div class="service-item">
-                    <div class="service-icon">📱</div>
-                    <h3>Mobile Development</h3>
-                    <p>I develop mobile applications that run smoothly on both iOS and Android platforms.</p>
-                </div>
-                <div class="service-item">
                     <div class="service-icon">📊</div>
-                    <h3>SEO Optimization</h3>
-                    <p>I optimize your website to rank higher in search engines, bringing more traffic to your business.</p>
+                    <h3>Data Analytics</h3>
+                    <p>Expertise in data cleaning, collection, validation, and extraction for comprehensive analysis and insights.</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">📈</div>
+                    <h3>Data Visualization</h3>
+                    <p>Creating interactive dashboards and reports using Power BI and Tableau for effective data presentation.</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">🤖</div>
+                    <h3>Machine Learning</h3>
+                    <p>Developing predictive models and conducting statistical analysis for data-driven decision making.</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">💻</div>
+                    <h3>Programming</h3>
+                    <p>Proficient in Python, SQL, and C++ for data analysis and software development.</p>
                 </div>
             </div>
         </div>
@@ -807,74 +1294,35 @@
     <!-- Portfolio Section -->
     <section id="portfolio">
         <div class="container">
-            <h2 class="section-title">My Portfolio</h2>
+            <h2 class="section-title">My Projects</h2>
             <div class="portfolio-filters">
                 <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="web">Web Design</button>
-                <button class="filter-btn" data-filter="app">App Development</button>
-                <button class="filter-btn" data-filter="ui">UI/UX</button>
+                <button class="filter-btn" data-filter="analytics">Analytics</button>
+                <button class="filter-btn" data-filter="visualization">Visualization</button>
+                <button class="filter-btn" data-filter="ml">Machine Learning</button>
             </div>
             <div class="portfolio-grid">
-                <div class="portfolio-item" data-category="web">
+                <div class="portfolio-item" data-category="analytics">
                     <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1517292987719-0369a794ec0f?w=300&h=250&fit=crop" alt="Portfolio Item">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=250&fit=crop" alt="HR Analytics Dashboard">
                     </div>
                     <div class="portfolio-overlay">
-                        <h3>E-commerce Website</h3>
-                        <p>Web Development</p>
+                        <h3>HR Analytics Dashboard</h3>
+                        <p>Power BI Dashboard</p>
                         <a href="#">View Project</a>
                     </div>
                 </div>
-                <div class="portfolio-item" data-category="app">
+                <div class="portfolio-item" data-category="visualization">
                     <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1526925539332-aa3b66e35444?w=300&h=250&fit=crop" alt="Portfolio Item">
+                        <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=300&h=250&fit=crop" alt="Netflix Analysis">
                     </div>
                     <div class="portfolio-overlay">
-                        <h3>Food Delivery App</h3>
-                        <p>App Development</p>
+                        <h3>Netflix Data Analysis</h3>
+                        <p>Data Visualization</p>
                         <a href="#">View Project</a>
                     </div>
                 </div>
-                <div class="portfolio-item" data-category="ui">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=250&fit=crop" alt="Portfolio Item">
-                    </div>
-                    <div class="portfolio-overlay">
-                        <h3>Dashboard UI</h3>
-                        <p>UI/UX Design</p>
-                        <a href="#">View Project</a>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="web">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=300&h=250&fit=crop" alt="Portfolio Item">
-                    </div>
-                    <div class="portfolio-overlay">
-                        <h3>Real Estate Website</h3>
-                        <p>Web Development</p>
-                        <a href="#">View Project</a>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="app">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=250&fit=crop" alt="Portfolio Item">
-                    </div>
-                    <div class="portfolio-overlay">
-                        <h3>Fitness Tracker App</h3>
-                        <p>App Development</p>
-                        <a href="#">View Project</a>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="ui">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1573867639040-6dd25fa5f597?w=300&h=250&fit=crop" alt="Portfolio Item">
-                    </div>
-                    <div class="portfolio-overlay">
-                        <h3>Social Media UI</h3>
-                        <p>UI/UX Design</p>
-                        <a href="#">View Project</a>
-                    </div>
-                </div>
+                <!-- Add more portfolio items as needed -->
             </div>
         </div>
     </section>
@@ -885,19 +1333,19 @@
             <h2 class="section-title">What My Clients Say</h2>
             <div class="testimonial-slider">
                 <div class="testimonial-slide active">
-                    <p class="testimonial-text">"Working with this developer was an amazing experience. They delivered the project on time and exceeded all our expectations. Their attention to detail and creativity made our website stand out from the competition."</p>
-                    <p class="testimonial-author">John Doe</p>
-                    <p class="testimonial-position">CEO, Tech Company</p>
+                    <p class="testimonial-text">"Khushboo's expertise in data analytics transformed our business insights. Her Power BI dashboards are not only visually appealing but also provide actionable insights that helped us make informed decisions. Her attention to detail and analytical skills are exceptional."</p>
+                    <p class="testimonial-author">Rajesh Sharma</p>
+                    <p class="testimonial-position">Analytics Manager, Tech Solutions India</p>
                 </div>
                 <div class="testimonial-slide">
-                    <p class="testimonial-text">"I'm extremely satisfied with the website they created for my business. It's not only visually appealing but also very functional. The developer was very responsive and incorporated all my feedback promptly."</p>
-                    <p class="testimonial-author">Jane Smith</p>
-                    <p class="testimonial-position">Owner, Fashion Boutique</p>
+                    <p class="testimonial-text">"Working with Khushboo on our data science project was a great experience. Her understanding of machine learning concepts and ability to explain complex insights in simple terms made our collaboration highly productive. The predictive models she developed exceeded our expectations."</p>
+                    <p class="testimonial-author">Priya Patel</p>
+                    <p class="testimonial-position">Data Science Lead, Analytics Hub</p>
                 </div>
                 <div class="testimonial-slide">
-                    <p class="testimonial-text">"This developer transformed our outdated website into a modern, responsive platform that has significantly increased our online presence. Their technical expertise and creative vision were exactly what we needed."</p>
-                    <p class="testimonial-author">Mike Johnson</p>
-                    <p class="testimonial-position">Marketing Director, Startup</p>
+                    <p class="testimonial-text">"Khushboo's work on our HR analytics dashboard was outstanding. She not only delivered insightful visualizations but also provided valuable recommendations that helped improve our employee retention strategies. Her professional approach and technical skills are commendable."</p>
+                    <p class="testimonial-author">Amit Verma</p>
+                    <p class="testimonial-position">HR Director, Global Services Ltd</p>
                 </div>
                 <div class="testimonial-nav">
                     <button id="prev-testimonial">&#8249;</button>
@@ -915,17 +1363,16 @@
                 <div class="contact-info">
                     <h3>Contact Information</h3>
                     <div class="contact-details">
-                        <p><i>📍</i> 123 Street, City, Country</p>
-                        <p><i>✉️</i> youremail@example.com</p>
-                        <p><i>📞</i> +1 234 567 890</p>
+                        <p><i>📍</i> Parul University, Vadodara, Gujarat, India - 391760</p>
+                        <p><i>✉️</i> khushboostar1232@gmail.com</p>
+                        <p><i>📞</i> +91-9504386204</p>
                     </div>
                     <div class="social-links">
-                        <h4>Follow Me</h4>
+                        <h4>Connect With Me</h4>
                         <div class="social-icons">
-                            <a href="#"><span>LinkedIn</span></a>
-                            <a href="#"><span>Twitter</span></a>
+                            <a href="https://linkedin.com/in/khushbookumari15" target="_blank"><span>LinkedIn</span></a>
                             <a href="#"><span>GitHub</span></a>
-                            <a href="#"><span>Instagram</span></a>
+                            <a href="#"><span>Twitter</span></a>
                         </div>
                     </div>
                 </div>
@@ -958,14 +1405,38 @@
     <footer>
         <div class="container">
             <div class="social-icons">
-                <a href="#"><span>LinkedIn</span></a>
-                <a href="#"><span>Twitter</span></a>
+                <a href="https://linkedin.com/in/khushbookumari15" target="_blank"><span>LinkedIn</span></a>
                 <a href="#"><span>GitHub</span></a>
-                <a href="#"><span>Instagram</span></a>
+                <a href="#"><span>Twitter</span></a>
             </div>
-            <p class="footer-text">&copy; 2023 Your Name. All Rights Reserved.</p>
+            <p class="footer-text">&copy; 2024 Khushboo Kumari. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <!-- Add this section for Certifications -->
+    <section id="certifications" class="certifications-section">
+        <div class="container">
+            <h2 class="section-title">Certifications & Achievements</h2>
+            <div class="certifications-grid">
+                <div class="certification-item">
+                    <h3>Power BI Virtual Internship (PwC)</h3>
+                    <p>Score: 80% (Jan 2025)</p>
+                </div>
+                <div class="certification-item">
+                    <h3>Data Analytics & Visualization (Accenture)</h3>
+                    <p>Score: 80% (Sep 2024)</p>
+                </div>
+                <div class="certification-item">
+                    <h3>Quantium Data Analytics Certification</h3>
+                    <p>Score: 80% (Jan 2025)</p>
+                </div>
+                <div class="certification-item">
+                    <h3>DSA using C++ Certification</h3>
+                    <p>Professional Certification</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
         // Mobile Navigation
@@ -1102,6 +1573,67 @@
                     link.classList.add('active');
                 }
             });
+        });
+
+        // Scroll Animation
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.service-item, .portfolio-item, .certification-item, .skill-item, .testimonial-slide');
+            
+            elements.forEach(element => {
+                if (isElementInViewport(element)) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize elements
+        document.querySelectorAll('.service-item, .portfolio-item, .certification-item, .skill-item, .testimonial-slide').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScrollAnimation);
+        // Trigger once on load
+        handleScrollAnimation();
+
+        // Add smooth scroll reveal for skill bars
+        function revealSkills() {
+            const skillLevels = document.querySelectorAll('.skill-level');
+            skillLevels.forEach(skill => {
+                const width = skill.getAttribute('data-level');
+                if (isElementInViewport(skill)) {
+                    skill.style.width = width;
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealSkills);
+        revealSkills();
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('#hero');
+            const heroContent = document.querySelector('.hero-content');
+            
+            if (scrolled < window.innerHeight) {
+                hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+                heroContent.style.opacity = 1 - (scrolled * 2 / window.innerHeight);
+            }
         });
     </script>
 </body>
